@@ -1,10 +1,380 @@
+/* ..................................... ENTETE ................................ */
 img{
-	max-width:100%;
+	width:100%;
+
 }
+
+
 * {
 	margin: 0;
 	padding: 0;
+	font-family: 'Josefin Sans', sans-serif;
+
+
 }
+
+
+
+/* ...............................FIN ENTETE................................... */
+
+
+
+
+
+
+
+
+
+
+/* ///////////////////////// VALENTIN //////////////////////////////////// */
+
 body{
-    
+ 	display: flex;
+	flex-direction: row;
+	margin: 0;
+  height: 100vh;
+	background-color: #f9b111;
+	overflow: hidden;
 }
+
+
+#gauche{
+
+	position:relative;
+	left:0;
+	Top:0;
+	display: flex;
+	flex-direction: column;
+	min-width: 250px;
+	height:100vh;
+	width:25vw;
+
+
+
+}
+
+#droite{
+
+	display: flex;
+	flex-direction: column;
+	height:100vh;
+	width:75vw;
+
+
+}
+
+
+
+
+
+/* .................Partie droite............................ */
+
+#titre{
+
+	position:relative;
+	width:30%;
+	padding:0;
+	margin-top:1%;
+	align-self: center;
+
+
+}
+#sliderGeneral {
+	position: relative;
+	display: flex;
+	min-height: 210px;
+	max-height: 210px;
+	width: 100%;
+	
+}
+#sliderGeneral .menuGen {
+	position: absolute;
+}
+#menuGeneral {
+	display: flex;
+	justify-self: flex-start;
+}
+#menuGeneral input, #menuStore input {
+	display: none;
+}
+#menuGeneral label, #menuStore label {
+	border: 3px solid #999;
+	cursor: pointer;
+	transition: all 0.5s;
+	opacity: 0.6;
+}
+#menuGeneral input[name='menuSwitchGen']:checked+label, #menuStore input[name='menuSwitchStore']:checked+label {
+	border-color: #666;
+	opacity: 1;
+}
+.menuGen {
+	background-color:rgba(255, 255, 255, 0.3);
+	height: 200px;
+	min-height: 200px;
+	width:100%;
+	min-width:200px;
+	margin-bottom: 10px;
+}
+.iconMenu {
+	margin: 0 10px;
+	margin-left:0;
+	height: 37px;
+	width: 37px;
+	background-color:blue;
+	border: 3px solid #999;
+	cursor: pointer;
+	transition: all 0.5s;
+	opacity: 0.6;
+}
+#buffTemporaire {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+}
+.notSelect {
+	visibility: hidden;
+}
+.select {
+	visibility: visible;
+}
+
+#buffTemporaire img {
+	width: 80px;
+	height: 80px;
+	margin: 20px;
+}
+#sliderStore {
+	position: relative;
+	display: flex;
+	min-height: 210px;
+	max-height: 210px;
+	width: 100%;
+	flex-direction: column;
+}
+.storeChoice {
+	position: absolute;
+}
+#thumbnails {
+	position: absolute;
+	bottom: 0%;
+	align-self: center;
+	margin: 20px;
+	display: flex;
+	width: 400px;
+	justify-content: space-evenly;
+}
+#thumbnails img {
+	width: 50px;
+	height: 50px;
+	display: block;
+}
+#thumbnails input {
+  display: none;
+}
+#thumbnails label {
+	border: 3px solid #999;
+	cursor: pointer;
+	transition: all 0.5s;
+	opacity: 0.6;
+}
+#thumbnails input[name='cardSwitch']:checked+label {
+	border-color: #666;
+	opacity: 1;
+}
+#globalGeneral{
+	display: flex;
+	flex-direction: row;
+}
+
+/* ...............................Cartes............................. */
+.carte{
+	display:flex;
+	flex-direction: row;
+	background-color:rgba(255, 255, 255, 0.3);
+	font-size: 1vw;
+	min-width: 330px;
+	width:100%;
+}
+
+.contenu{
+	display:flex;
+	flex-direction: column;
+	width:80%;
+	min-width:200px;
+	margin:1.5% 3% 1.5% 3%;
+
+}
+
+.illustration{
+	width:20%;
+	min-width: 200px;
+	/* width:30%; */
+
+}
+	
+.description{
+	height:65%;
+	margin-bottom: 1.5%;
+}
+
+.achat{
+
+	display:flex;
+	flex-direction: row;	
+	height:35%;
+}
+
+
+.boutonAchat{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #0c5d83;
+	color:#ffffff;
+	min-width: 80px;
+	width:100%;
+	position:relative;
+	bottom:0%;
+	height:50%;
+
+}
+.boutonAchat:hover{
+background-color: #19749f;
+transform: scale(1.07);
+cursor:pointer;
+}
+
+.prix{
+	margin-top:12%;
+}
+
+.boutonAchat p{
+	font-size: 1vw;
+}
+
+h3{
+	margin-bottom:1%;
+}
+.zoneEffet{
+	display: flex;
+	width:80%;
+	min-width: 270px;
+	align-items: end;
+}
+.effets{
+	text-align: left;
+	font-weight: 600;
+	font-style:italic;
+	color:#0c5d83;
+
+
+}
+.zoneBouton{
+	display:flex;
+	align-items: end;
+
+	width:20%
+}
+/* .................Partie gauche............................ */
+
+#fondRideau{
+
+	background-color: #e19a0b;
+	position: absolute;
+	z-index: 0;
+	top:0%;
+	left:0%;
+	width: 73%;
+	height:100vh;
+}
+
+
+
+
+#rideau{
+
+	position: absolute;
+	top:0%;
+	right:0%;
+	height:107%;
+	min-width:82px;
+	width:10vw;
+	z-index: 1;
+}
+
+#imgRideau{
+
+	width:100%;
+	height:100%;
+
+}
+
+#table{
+
+	position: absolute;
+	z-index: 2;
+	flex-shrink: 0;
+	width:80%;
+	bottom:-1vh;
+	left:0vw;
+}
+
+#clicker{
+
+	width:100%;
+	height:60%;
+
+
+
+}
+
+
+.boite{
+	position:absolute;
+	bottom:0%;
+	left:11%;
+	width:40%;
+
+}
+
+#boiteDessus{
+
+	z-index:7;
+}
+
+
+#boiteDessous{
+
+
+
+	z-index:3;
+}
+
+.bras{
+	position:absolute;	
+	width:50%;
+
+	left:-13%;
+	transform-origin: 0px 50%;
+	transform: rotate(-11deg);
+
+}
+
+
+#brasDessous{
+	z-index: 4;
+}
+
+
+#brasPaper{
+	z-index: 5;
+}
+
+#brasDessus{
+	z-index: 6;
+}
+
+
+
+
+/* ////////////////////////////////////////// FIN VALENTIN /////////////////////////////////////////////// *
