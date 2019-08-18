@@ -45,7 +45,7 @@ var $compteurArgentCaisseNoire;
 
 //....................................CALENDRIER INTERSIDERAL....................................................
 
-localStorage.clear();
+//localStorage.clear();
 
 
 // 1jour dure 2 min
@@ -585,10 +585,10 @@ function clickAlgoBack(){
   // console.log($nbClicks)
   //// FIN VAL ///
 
-  $compteurVote=$compteurVote+(100*$MultiClickGlobal);
-  $compteurArgent=$compteurArgent+(500*$MultiClickGlobal);
-  $compteurVotesTotal=$compteurVotesTotal+(100*$MultiClickGlobal);
-  $compteurArgentTotal=$compteurArgentTotal+(500*$MultiClickGlobal);
+  $compteurVote=$compteurVote+(1*$MultiClickGlobal);
+  $compteurArgent=$compteurArgent+(5*$MultiClickGlobal);
+  $compteurVotesTotal=$compteurVotesTotal+(1*$MultiClickGlobal);
+  $compteurArgentTotal=$compteurArgentTotal+(5*$MultiClickGlobal);
   $containerCompteurVote.innerHTML = $compteurAffichageVote;
   $containerCompteurArgent.innerHTML = $compteurAffichageArgent;
  
