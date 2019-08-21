@@ -9,7 +9,6 @@ var $compteurAffichageVote;
 var $compteurAffichageArgent;
 
 
-
 $clicker = document.getElementById('clicker');
 $brasDessous = document.getElementById('brasDessous');
 $brasDessus = document.getElementById('brasDessus');
@@ -18,7 +17,7 @@ $nbClicks=0;
 $nbClicks2=0;
 $volumeMaster=1;
 $MultiClickGlobal=1;    
-
+$nbClicksTotal=0;
 
 
 function majMulti(){
@@ -40,6 +39,11 @@ var $compteurVote;
 var $compteurVotesTotal;
 var $compteurArgentTotal;
 var $compteurArgentCaisseNoire;
+if(!localStorage.getItem('$compteurArgentCaisseNoire')){
+  $compteurArgentCaisseNoire = 0;
+}else{
+  $compteurArgentCaisseNoire = parseInt(localStorage.getItem("$compteurArgentCaisseNoire"));
+}
 
 if (!localStorage.getItem('boutonAchatBelleGueule')){
   localStorage.setItem('boutonAchatBelleGueule',"00")
@@ -202,6 +206,20 @@ $infoJustice = document.getElementById("infoJustice");
 $infoBfn = document.getElementById("infoBfn");
 $infoPanem = document.getElementById("infoPanem");
 
+$infoBelleGueuleEffet = document.getElementById("infoBelleGueuleEffet");
+$infoArticleEffet = document.getElementById("infoArticleEffet");
+$infoBelleMeufEffet = document.getElementById("infoBelleMeufEffet");
+$infoPhotoEffet = document.getElementById("infoPhotoEffet");
+$infoGrenadeEffet = document.getElementById("infoGrenadeEffet");
+$infoAvocatEffet = document.getElementById("infoAvocatEffet");
+$infoChomageEffet = document.getElementById("infoChomageEffet");
+$infoRsaEffet = document.getElementById("infoRsaEffet");
+$infoEducationEffet = document.getElementById("infoEducationEffet");
+$infoCabinetEffet = document.getElementById("infoCabinetEffet");
+$infoVenteArmeEffet = document.getElementById("infoVenteArmeEffet");
+$infoJusticeEffet = document.getElementById("infoJusticeEffet");
+$infoBfnEffet = document.getElementById("infoBfnEffet");
+$infoPanemEffet = document.getElementById("infoPanemEffet");
 
 
 
@@ -220,7 +238,20 @@ $dureeJustice =10000000000;
 $dureeBfn =180;
 $dureePanem =10000000000;
 
-
+$effetBelleMeufVote = 600 / $ratioSecondesParJour;
+$effetBelleMeufArgent = 3000 / $ratioSecondesParJour;
+$effetPhotoVote = 1200 / $ratioSecondesParJour;
+$effetPhotoArgent = 6000 / $ratioSecondesParJour;
+$effetEducationArgent = Math.round((60000 / 28) / $ratioSecondesParJour) ;
+$effetChomageArgent = Math.round(2500 / $ratioSecondesParJour);
+$effetChomageVote = Math.round(1000 / $ratioSecondesParJour);
+$effetRsaArgent = Math.round(40000 / $ratioSecondesParJour);
+$effetRsaVote = Math.round(2000 / $ratioSecondesParJour);
+$effetBfnArgent = Math.round(50000 / $ratioSecondesParJour);
+$effetBfnVote = Math.round(1000 / $ratioSecondesParJour);
+$effetArmeCaisseNoire = 50000;
+$effetAvocatArgent = Math.round(10000 / $ratioSecondesParJour);
+$effetCabinetAvocatArgent = Math.round(20000 / $ratioSecondesParJour);
 
 
 function majCartesActives(){
@@ -231,7 +262,7 @@ function majCartesActives(){
   else{
     $buffBelleGueule.classList.toggle("cacheCartesBuff",false);
     $infoBelleGueule.innerHTML =$dureeBelleGueule-$tempsDeJeuJoursVirtuels+parseInt(localStorage.getItem("boutonAchatBelleGueule").substr(1));
-
+    $infoBelleGueuleEffet.innerHTML = 'multi x '+$multiBelleGueule;
   }
 
 
@@ -241,7 +272,7 @@ function majCartesActives(){
   else{
     $buffBelleMeuf.classList.toggle("cacheCartesBuff",false);
     $infoBelleMeuf.innerHTML =$dureeBelleMeuf-$tempsDeJeuJoursVirtuels+parseInt(localStorage.getItem("boutonAchatBelleMeuf").substr(1));
-
+    $infoBelleMeufEffet.innerHTML =  $effetBelleMeufVote + ' <i class="fas fa-vote-yea"></i> / sec '+'<br>'+$effetBelleMeufArgent+' <i class="fas fa-dollar-sign"></i> / sec';
   }
 
   if (localStorage.getItem("boutonAchatphotoDeFamille") === null || parseInt(localStorage.getItem("boutonAchatphotoDeFamille")) == 0) {
@@ -250,7 +281,7 @@ function majCartesActives(){
   else{
     $buffPhoto.classList.toggle("cacheCartesBuff",false);
     $infoPhoto.innerHTML =$dureePhoto-$tempsDeJeuJoursVirtuels+parseInt(localStorage.getItem("boutonAchatphotoDeFamille").substr(1));
-
+    $infoPhotoEffet.innerHTML = $effetPhotoVote + ' <i class="fas fa-vote-yea"></i> / sec '+'<br>'+$effetPhotoArgent+' <i class="fas fa-dollar-sign"></i> / sec';
   }
 
   if (localStorage.getItem("boutonAchatGrenade") === null || parseInt(localStorage.getItem("boutonAchatGrenade")) == 0) {
@@ -259,7 +290,7 @@ function majCartesActives(){
   else{
     $buffGrenade.classList.toggle("cacheCartesBuff",false);
     $infoGrenade.innerHTML =$dureeGrenade-$tempsDeJeuJoursVirtuels+parseInt(localStorage.getItem("boutonAchatGrenade").substr(1));
-
+    $infoGrenadeEffet.innerHTML = 'multi x '+$multiGrenade;
   }
 
   if (localStorage.getItem("boutonAchatEducation") === null || parseInt(localStorage.getItem("boutonAchatEducation")) == 0) {
@@ -268,7 +299,7 @@ function majCartesActives(){
   else{
     $buffEducation.classList.toggle("cacheCartesBuff",false);
     $infoEducation.innerHTML =$dureeEducation-$tempsDeJeuJoursVirtuels+parseInt(localStorage.getItem("boutonAchatEducation").substr(1));
-
+    $infoEducationEffet.innerHTML = $effetEducationArgent+' <i class="fas fa-dollar-sign"></i> / sec';
   }
 
   if (localStorage.getItem("boutonAchatbfntv") === null || parseInt(localStorage.getItem("boutonAchatbfntv")) == 0) {
@@ -277,7 +308,7 @@ function majCartesActives(){
   else{
     $buffBfn.classList.toggle("cacheCartesBuff",false);
     $infoBfn.innerHTML =$dureeBfn-$tempsDeJeuJoursVirtuels+parseInt(localStorage.getItem("boutonAchatbfntv").substr(1));
-
+    $infoBfnEffet.innerHTML =  $effetBfnVote + ' <i class="fas fa-vote-yea"></i> / sec '+'<br>'+$effetBfnArgent+' <i class="fas fa-dollar-sign"></i> / sec';
   }
 
   if (localStorage.getItem("boutonAchatPanem") === null || parseInt(localStorage.getItem("boutonAchatPanem")) == 0) {
@@ -295,7 +326,7 @@ function majCartesActives(){
   else{
     $buffChomage.classList.toggle("cacheCartesBuff",false);
     $infoChomage.innerHTML =$dureeChomage-$tempsDeJeuJoursVirtuels+parseInt(localStorage.getItem("boutonAchatChomage").substr(1));
-
+    $infoChomageEffet.innerHTML =  $effetChomageVote + ' <i class="fas fa-vote-yea"></i> / sec '+'<br>'+$effetChomageArgent+' <i class="fas fa-dollar-sign"></i> / sec';
   }
 
   if (localStorage.getItem("boutonAchatrsa") === null || parseInt(localStorage.getItem("boutonAchatrsa")) == 0) {
@@ -304,7 +335,7 @@ function majCartesActives(){
   else{
     $buffRsa.classList.toggle("cacheCartesBuff",false);
     $infoRsa.innerHTML =$dureeRsa-$tempsDeJeuJoursVirtuels+parseInt(localStorage.getItem("boutonAchatrsa").substr(1));
-
+    $infoRsaEffet.innerHTML =  $effetRsaVote + ' <i class="fas fa-vote-yea"></i> / sec '+'<br>'+$effetRsaArgent+' <i class="fas fa-dollar-sign"></i> / sec';
   }
 
   if (localStorage.getItem("boutonAchatarticleJournal") === null || parseInt(localStorage.getItem("boutonAchatarticleJournal")) == 0) {
@@ -313,7 +344,7 @@ function majCartesActives(){
   else{
     $buffArticle.classList.toggle("cacheCartesBuff",false);
     $infoArticle.innerHTML =$dureeArticle-$tempsDeJeuJoursVirtuels+parseInt(localStorage.getItem("boutonAchatarticleJournal").substr(1));
-
+    $infoArticleEffet.innerHTML = 'multi x '+$multiArticleJournal;
   }
 
   if (localStorage.getItem("boutonAchatVenteArme") === null || parseInt(localStorage.getItem("boutonAchatVenteArme")) == 0) {
@@ -322,7 +353,7 @@ function majCartesActives(){
   else{
     $buffVenteArme.classList.toggle("cacheCartesBuff",false);
     $infoVenteArme.innerHTML ="Infini";
-
+    $infoVenteArmeEffet.innerHTML = '+ '+$effetArmeCaisseNoire+ ' <i class="fas fa-dollar-sign"></i><br> caisse noire';
   }
 
 
@@ -332,7 +363,7 @@ function majCartesActives(){
   else{
     $buffAvocat.classList.toggle("cacheCartesBuff",false);
     $infoAvocat.innerHTML ="Infini";
-
+    $infoAvocatEffet.innerHTML = '- '+ $effetAvocatArgent+' <i class="fas fa-dollar-sign"></i> / sec <br>Malus - 30%';
   }
 
 
@@ -342,7 +373,7 @@ function majCartesActives(){
   else{
     $buffCabinet.classList.toggle("cacheCartesBuff",false);
     $infoCabinet.innerHTML ="Infini";
-
+    $infoCabinetEffet.innerHTML = '- '+ $effetCabinetAvocatArgent+' <i class="fas fa-dollar-sign"></i> / sec <br>Malus - 50%';
   }
 
 
@@ -352,7 +383,7 @@ function majCartesActives(){
   else{
     $buffJustice.classList.toggle("cacheCartesBuff",false);
     $infoJustice.innerHTML ="Infini";
-
+    $infoJusticeEffet.innerHTML = '0 Malus';
   }
 
 
@@ -495,7 +526,6 @@ function storageRegulier(){
   localStorage.setItem('compteurArgentTotal', $compteurArgentTotal);
   localStorage.setItem('$compteurArgentCaisseNoire', $compteurArgentCaisseNoire);
   localStorage.setItem('$attenuationPertesGlobal', $attenuationPertesGlobal);
-  localStorage.setItem('$compteurArgentCaisseNoire', $compteurArgentCaisseNoire);
 
 }
 setInterval (storageRegulier, 4000)
@@ -665,8 +695,8 @@ function clickAlgoBack(){
 
 // Fonction du click sur la boite
 function click() {
-  $nbClicks2=$nbClicks2+1
-
+  $nbClicks2=$nbClicks2+1;
+  $nbClicksTotal = $nbClicksTotal+1;
   if($nbClicks+2>0){
     $chute=0;
     $angle=0;    
@@ -1171,6 +1201,7 @@ function stat(){
 	localStorage.setItem('timeFromStartAllPlay', $tempsDeJeuSeconde);
 	localStorage.setItem('argentTotalAllPlay', $compteurArgentTotal);
 	localStorage.setItem('voteTotalAllPlay', $compteurVotesTotal);
+  localStorage.setItem('nbClicksTotal', $nbClicksTotal);
 	if (isNaN($compteurArgentCaisseNoire)){}
 	else { document.getElementById("caisseNoire").innerHTML = "Votre caisse noire: " + $compteurArgentCaisseNoire; }
 	document.getElementById("voteTotalThisPlay").innerHTML = "Gain de vote cette partie: " + $compteurVote;
@@ -1188,6 +1219,11 @@ function stat(){
 	else {
 		document.getElementById("attenuationPertesGlobal").innerHTML = "Réduction des Pertes: " + ((1-$attenuationPertesGlobal)*10);
 	}
+  document.getElementById("nbClicks").innerHTML = "Nb Clicks: " + $nbClicks2;
+  if (isNaN(localStorage.getItem("nbClicksTotal"))){}
+  else {
+    document.getElementById("nbClicksTotalPlay").innerHTML = "Nb Clicks Total: " + localStorage.getItem('nbClicksTotal');
+  }
 }
 
 setInterval(stat, 1000);
@@ -4032,26 +4068,27 @@ function reset(){
   else { $compteurArgentTotal += argentAddTotal;}
   if (isNaN(timeAdd)) {}
   else {$tempsDeJeuSeconde += timeAdd;}
-  $compteurArgent = 0; // à remplacer par $compteurArgentCaisseNoire;
+  $compteurArgent = parseInt(localStorage.getItem("$compteurArgentCaisseNoire"));
   $compteurVote = 0;
-  localStorage.setItem('boutonAchatBelleGueule', '000');
-  localStorage.setItem('boutonAchatBelleMeuf', '000');
-  localStorage.setItem('boutonAchatarticleJournal', '000');
-  localStorage.setItem('boutonAchatphotoDeFamille', '000');
-  localStorage.setItem('boutonAchatJustice', '000');
-  localStorage.setItem('boutonAchatCabinetAvocat', '000');
-  localStorage.setItem('boutonAchatAvocat', '000');
-  localStorage.setItem('boutonAchatrsa', '000');
-  localStorage.setItem('boutonAchatChomage', '000');
-  localStorage.setItem('boutonAchatEducation', '000');
-  localStorage.setItem('boutonAchatGrenade', '000');
-  localStorage.setItem('boutonAchatGunsRoses', '000');
-  localStorage.setItem('boutonAchatarticleJournal', '000');
-  localStorage.setItem('boutonAchatPanem', '000');
-  localStorage.setItem('boutonAchatbfntv', '000');
+  localStorage.setItem('boutonAchatBelleGueule', '00');
+  localStorage.setItem('boutonAchatBelleMeuf', '00');
+  localStorage.setItem('boutonAchatarticleJournal', '00');
+  localStorage.setItem('boutonAchatphotoDeFamille', '00');
+  localStorage.setItem('boutonAchatJustice', '00');
+  localStorage.setItem('boutonAchatCabinetAvocat', '00');
+  localStorage.setItem('boutonAchatAvocat', '00');
+  localStorage.setItem('boutonAchatrsa', '00');
+  localStorage.setItem('boutonAchatChomage', '00');
+  localStorage.setItem('boutonAchatEducation', '00');
+  localStorage.setItem('boutonAchatGrenade', '00');
+  localStorage.setItem('boutonAchatGunsRoses', '00');
+  localStorage.setItem('boutonAchatarticleJournal', '00');
+  localStorage.setItem('boutonAchatPanem', '00');
+  localStorage.setItem('boutonAchatbfntv', '00');
   $tempsDeJeuSeconde = 0;
   localStorage.removeItem('$stopCrs');
   localStorage.removeItem('$stopMigrants');
+  $nbClicks2 = 0;
 
   
 }
