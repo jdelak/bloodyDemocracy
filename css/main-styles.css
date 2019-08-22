@@ -440,7 +440,8 @@ padding: 3% 3% 3% 3%
 	display: flex;
 	flex-direction:row;
 	justify-content: center;
-	/* align-items: center; */
+	align-items: start;
+
 
 }
 
@@ -485,6 +486,7 @@ box-shadow: 0px 0px 0px 2px #fbc959 inset;
 	font-size: 14px;
 	color: rgba(12, 93, 131, 1);
 }
+
 
 .cacheCartesBuff{
 	display:none;

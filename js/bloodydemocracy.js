@@ -9,7 +9,6 @@ var $compteurAffichageVote;
 var $compteurAffichageArgent;
 
 
-
 $clicker = document.getElementById('clicker');
 $brasDessous = document.getElementById('brasDessous');
 $brasDessus = document.getElementById('brasDessus');
@@ -18,7 +17,7 @@ $nbClicks=0;
 $nbClicks2=0;
 $volumeMaster=1;
 $MultiClickGlobal=1;    
-
+$nbClicksTotal=0;
 
 
 function majMulti(){
@@ -40,6 +39,11 @@ var $compteurVote;
 var $compteurVotesTotal;
 var $compteurArgentTotal;
 var $compteurArgentCaisseNoire;
+if(!localStorage.getItem('$compteurArgentCaisseNoire')){
+  $compteurArgentCaisseNoire = 0;
+}else{
+  $compteurArgentCaisseNoire = parseInt(localStorage.getItem("$compteurArgentCaisseNoire"));
+}
 
 if (!localStorage.getItem('boutonAchatBelleGueule')){
   localStorage.setItem('boutonAchatBelleGueule',"00")
@@ -527,7 +531,6 @@ function storageRegulier(){
   localStorage.setItem('compteurArgentTotal', $compteurArgentTotal);
   localStorage.setItem('$compteurArgentCaisseNoire', $compteurArgentCaisseNoire);
   localStorage.setItem('$attenuationPertesGlobal', $attenuationPertesGlobal);
-  localStorage.setItem('$compteurArgentCaisseNoire', $compteurArgentCaisseNoire);
 
 }
 setInterval (storageRegulier, 4000)
@@ -697,8 +700,8 @@ function clickAlgoBack(){
 
 // Fonction du click sur la boite
 function click() {
-  $nbClicks2=$nbClicks2+1
-
+  $nbClicks2=$nbClicks2+1;
+  $nbClicksTotal = $nbClicksTotal+1;
   if($nbClicks+2>0){
     $chute=0;
     $angle=0;    
@@ -1215,6 +1218,7 @@ function stat(){
 	localStorage.setItem('timeFromStartAllPlay', $tempsDeJeuSeconde);
 	localStorage.setItem('argentTotalAllPlay', $compteurArgentTotal);
 	localStorage.setItem('voteTotalAllPlay', $compteurVotesTotal);
+  localStorage.setItem('nbClicksTotal', $nbClicksTotal);
 	if (isNaN($compteurArgentCaisseNoire)){}
 	else { document.getElementById("caisseNoire").innerHTML = "Votre caisse noire: " + $compteurArgentCaisseNoire; }
 	document.getElementById("voteTotalThisPlay").innerHTML = "Gain de vote cette partie: " + $compteurVote;
@@ -1232,6 +1236,11 @@ function stat(){
 	else {
 		document.getElementById("attenuationPertesGlobal").innerHTML = "Réduction des Pertes: " + ((1-$attenuationPertesGlobal)*10);
 	}
+  document.getElementById("nbClicks").innerHTML = "Nb Clicks: " + $nbClicks2;
+  if (isNaN(localStorage.getItem("nbClicksTotal"))){}
+  else {
+    document.getElementById("nbClicksTotalPlay").innerHTML = "Nb Clicks Total: " + localStorage.getItem('nbClicksTotal');
+  }
 }
 
 setInterval(stat, 1000);
@@ -4099,26 +4108,27 @@ function reset(){
   else { $compteurArgentTotal += argentAddTotal;}
   if (isNaN(timeAdd)) {}
   else {$tempsDeJeuSeconde += timeAdd;}
-  $compteurArgent = 0; // à remplacer par $compteurArgentCaisseNoire;
+  $compteurArgent = parseInt(localStorage.getItem("$compteurArgentCaisseNoire"));
   $compteurVote = 0;
-  localStorage.setItem('boutonAchatBelleGueule', '000');
-  localStorage.setItem('boutonAchatBelleMeuf', '000');
-  localStorage.setItem('boutonAchatarticleJournal', '000');
-  localStorage.setItem('boutonAchatphotoDeFamille', '000');
-  localStorage.setItem('boutonAchatJustice', '000');
-  localStorage.setItem('boutonAchatCabinetAvocat', '000');
-  localStorage.setItem('boutonAchatAvocat', '000');
-  localStorage.setItem('boutonAchatrsa', '000');
-  localStorage.setItem('boutonAchatChomage', '000');
-  localStorage.setItem('boutonAchatEducation', '000');
-  localStorage.setItem('boutonAchatGrenade', '000');
-  localStorage.setItem('boutonAchatGunsRoses', '000');
-  localStorage.setItem('boutonAchatarticleJournal', '000');
-  localStorage.setItem('boutonAchatPanem', '000');
-  localStorage.setItem('boutonAchatbfntv', '000');
+  localStorage.setItem('boutonAchatBelleGueule', '00');
+  localStorage.setItem('boutonAchatBelleMeuf', '00');
+  localStorage.setItem('boutonAchatarticleJournal', '00');
+  localStorage.setItem('boutonAchatphotoDeFamille', '00');
+  localStorage.setItem('boutonAchatJustice', '00');
+  localStorage.setItem('boutonAchatCabinetAvocat', '00');
+  localStorage.setItem('boutonAchatAvocat', '00');
+  localStorage.setItem('boutonAchatrsa', '00');
+  localStorage.setItem('boutonAchatChomage', '00');
+  localStorage.setItem('boutonAchatEducation', '00');
+  localStorage.setItem('boutonAchatGrenade', '00');
+  localStorage.setItem('boutonAchatGunsRoses', '00');
+  localStorage.setItem('boutonAchatarticleJournal', '00');
+  localStorage.setItem('boutonAchatPanem', '00');
+  localStorage.setItem('boutonAchatbfntv', '00');
   $tempsDeJeuSeconde = 0;
   localStorage.removeItem('$stopCrs');
   localStorage.removeItem('$stopMigrants');
+  $nbClicks2 = 0;
 
   
 }
