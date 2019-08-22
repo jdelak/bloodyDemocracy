@@ -174,6 +174,12 @@ setInterval(refreshCalendar,1000);
 
 // ................................................FIN CALENDRIER....................................................................
 
+
+
+
+
+
+
 //...............................MAJ CARTES ACTIVES ...............................................
 
 $buffBelleGueule = document.getElementById("buffBelleGueule");
@@ -389,7 +395,6 @@ function majCartesActives(){
 
 }
 setInterval(majCartesActives,1000);
-
 
 
 
@@ -1000,6 +1005,18 @@ $colorOngletPop="#19749f";
 	document.getElementById("id1Gestion").checked = "true"
 	document.getElementById("id1Argent").checked = "true"
 	document.getElementById("selectBuffTemporaire").checked = "true"
+
+  function stoppopvote(){
+    $pop1.classList.toggle("popDisplay",true)
+  }
+
+  function stoppopargent(){
+    $pop2.classList.toggle("popDisplay",true)
+  }
+
+  function stoppopgestion(){
+    $pop3.classList.toggle("popDisplay",true)
+  }
 
 
 function showVote(){

@@ -583,7 +583,7 @@
 					<div id="slideVote" class="storeChoice select">
 						
 						<div id="voidVote" class="carte carteVote carteMenu select">
-							<h2>MENU D'ACHAT VOTE</h2>
+							<h2>BONUS VOTE VIDE</h2>
 						</div>
 						
 						<div id="belleGueule" class="carte carteVote notSelect">
@@ -608,7 +608,7 @@
 										</p>
 									</div>
 									<div class="zoneBouton">
-										<div id="boutonAchatBelleGueule" class="boutonAchat" onclick="achat()" onmouseover="checkAchat(this);">
+										<div id="boutonAchatBelleGueule" class="boutonAchat" onclick="achat()"  onmouseover="checkAchat(this);">
 											<p><i class="fas fa-shopping-cart"></i>&nbsp Buy </p>
 										</div>
 									</div>
@@ -741,7 +741,7 @@
 					<div id="slideArgent" class="storeChoice notSelect">
 
 						<div id="voidArgent" class="carte carteArgent carteMenu">
-							<h2>MENU D'ACHAT ARGENT</h2>
+							<h2>BONUS ARGENT VIDE</h2>
 						</div>
 
 						<div id="fmi" class="carte carteArgent notSelect">
@@ -868,7 +868,7 @@
 					<div id="slideGestion" class="storeChoice notSelect">
 						
 						<div id="voidGestion" class="carte carteGestion carteMenu">
-							<h2>MENU D'ACHAT GESTION</h2>
+							<h2>BONUS GESTION VIDE</h2>
 						</div>
 						
 						<div id="articleJournal" class="carte carteGestion notSelect">
@@ -1022,8 +1022,8 @@
 					</div>
 				</div>
 			
-				<div id="thumbnailsVote" class="thumbnails select">
-					<div class="thumbDumb">
+				<div id="thumbnailsVote" class="thumbnails select" onclick="stoppopvote()">
+					<div class="thumbDumb" >
 						<input type="radio" name="cardSwitchVote" id="id1Vote" class="radioVote"/>
 						
 						<label id="hideBelleGueule" for="id1Vote" onclick="showBelleGueule()">
@@ -1058,7 +1058,7 @@
 					</div>
 				</div>
 				
-				<div id="thumbnailsArgent" class="thumbnails notSelect">
+				<div id="thumbnailsArgent" class="thumbnails notSelect" onclick="stoppopargent()">
 					<div class="thumbDumb">
 						
 						<input type="radio" name="cardSwitchArgent" id="id1Argent" class="radioArgent"/>
@@ -1088,7 +1088,7 @@
 					</div>
 				</div>
 				
-				<div id="thumbnailsGestion" class="thumbnails notSelect">
+				<div id="thumbnailsGestion"  class="thumbnails notSelect" onclick="stoppopgestion()" >
 					<div class="thumbDumb">
 						
 								
